@@ -1,24 +1,48 @@
+import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
+import { ArrowDownRight, ArrowRight, Menu, X, Sparkles, Flower2, Heart, ScanFace, CircleUserRound, MoveUpRight, Instagram, Facebook, Play } from "lucide-react";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
-export const Route = createFileRoute("/")({
-  component: Index,
-});
+export const Route = createFileRoute("/")({ component: Index });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
+const procedures = [
+  { icon: ScanFace, title: "Liposuction", text: "A demonstration category for personalized body contouring." },
+  { icon: Sparkles, title: "Non Surgical", text: "Illustrative aesthetic concepts and non-surgical care." },
+  { icon: Heart, title: "Breast Implants", text: "A fictional category for personalized procedures." },
+  { icon: Flower2, title: "Lip Surgery", text: "A sample category for facial aesthetic treatments." },
+  { icon: CircleUserRound, title: "Gender Unity", text: "Celebrating individuality and personal expression." },
+];
+const gallery = [
+  { src: "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=900&q=85", alt: "Skincare textures in a bright studio", label: "A quiet ritual" },
+  { src: "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?auto=format&fit=crop&w=900&q=85", alt: "Natural beauty portrait", label: "Natural expression" },
+  { src: "https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&w=900&q=85", alt: "Calm neutral wellness interior", label: "Considered spaces" },
+  { src: "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=900&q=85", alt: "Minimal skincare products", label: "Thoughtful details" },
+];
 function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [showDemo, setShowDemo] = useState(false);
+  const links = [["Home","#home"],["About","#about"],["Services","#services"],["Gallery","#gallery"],["Journal","#journal"],["Contact","#contact"]];
+  const goDemo = () => { setShowDemo(true); document.getElementById("contact")?.scrollIntoView({behavior:"smooth"}); };
+  return <main>
+    <div className="demo-ribbon">FICTIONAL BRAND · DESIGN DEMONSTRATION ONLY</div>
+    <header className="site-header">
+      <a href="#home" className="brand" aria-label="Progeny Aesthetic home"><span>PROGENY</span><small>A E S T H E T I C</small></a>
+      <button className="header-book" onClick={goDemo}>Book Appointment <ArrowUpRightIcon /></button>
+      <nav className={menuOpen ? "nav nav-open" : "nav"} aria-label="Main navigation">{links.map(([label,href])=><a key={label} href={href} onClick={()=>setMenuOpen(false)}>{label}</a>)}</nav>
+      <div className="social-head"><a href="#gallery" aria-label="Instagram demo"><Instagram size={16}/></a><a href="#gallery" aria-label="Facebook demo"><Facebook size={16}/></a></div>
+      <button className="mobile-menu" onClick={()=>setMenuOpen(!menuOpen)} aria-label={menuOpen ? "Close menu" : "Open menu"}>{menuOpen?<X/>:<Menu/>}</button>
+    </header>
+    <section className="hero" id="home">
+      <div className="hero-copy"><p className="eyebrow"><span/> BEAUTY, BALANCE & CONFIDENCE</p><h1>Perfect face.<br/><em>Personal harmony.</em></h1><p className="hero-description">A considered approach to aesthetic expression, imagined around individuality, balance and the beauty of feeling like yourself.</p><div className="hero-actions"><a className="button-primary" href="#services">Explore services <ArrowRight size={16}/></a><a className="text-link" href="#about">Our philosophy <ArrowDownRight size={16}/></a></div><div className="hero-note"><span className="note-line"/> A FICTIONAL CLINIC CONCEPT</div></div>
+      <div className="hero-visual"><img fetchPriority="high" src="https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?auto=format&fit=crop&w=1600&q=90" alt="Editorial portrait of an adult woman in soft natural light"/><div className="image-caption"><span>01 / THE ART OF SUBTLETY</span><span>Illustrative imagery</span></div><div className="hero-stamp"><span>Beauty</span><i>in balance</i><Sparkles size={18}/></div></div>
+      <div className="hero-index">01 <span>—</span> 04</div>
+    </section>
+    <section className="procedure-strip" id="services"><div className="strip-intro"><span className="eyebrow">EXPLORE THE CONCEPT</span><p>Areas of<br/>interest</p></div>{procedures.map(({icon:Icon,title,text},i)=><a className="procedure" href="#contact" key={title}><span className="procedure-icon"><Icon strokeWidth={1.2}/></span><span className="procedure-number">0{i+1}</span><h3>{title}</h3><p>{text}</p><ArrowUpRightIcon/></a>)}</section>
+    <section className="about section-wrap" id="about"><div className="about-images"><div className="about-photo photo-tall"><img loading="lazy" src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=850&q=85" alt="Relaxing facial skincare treatment in a bright room"/><span>THE ART OF CARE</span></div><div className="about-photo photo-small"><img loading="lazy" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=750&q=85" alt="Adult woman in a soft natural-light portrait"/><span>BEAUTY, REIMAGINED</span></div><div className="about-mark">P.</div></div><div className="about-copy"><p className="eyebrow"><span/> A NOTE ABOUT US</p><h2>Thoughtfully imagined.<br/><em>Beautifully considered.</em></h2><p>Welcome to Progeny Aesthetic, a fictional clinic concept created to demonstrate an elegant and modern digital experience. Our illustrative approach brings together personal expression, refined design and a welcoming atmosphere.</p><p>This demonstration presents a sample institutional experience, with fictional services, placeholder information and a carefully curated visual identity.</p><a className="text-link" href="#journal">Discover our philosophy <ArrowRight size={16}/></a><div className="signature">Beauty, balance <span>& confidence.</span></div></div></section>
+    <section className="values" id="journal"><div className="values-heading"><p className="eyebrow">THE PROGENY POINT OF VIEW</p><h2>Designed around<br/><em>your experience.</em></h2><p className="muted">A fictional framework for a more thoughtful aesthetic journey.</p></div><div className="value-grid">{[{n:"01",t:"Personal attention",d:"A sample experience shaped around individual preferences."},{n:"02",t:"Modern aesthetic concept",d:"A clean, contemporary approach to visual storytelling."},{n:"03",t:"A considered environment",d:"Quiet details, natural light and a sense of calm."},{n:"04",t:"Your own journey",d:"An illustrative space that celebrates personal expression."}].map(v=><article className="value-item" key={v.n}><span>{v.n}</span><h3>{v.t}</h3><p>{v.d}</p><ArrowUpRightIcon/></article>)}</div></section>
+    <section className="gallery-section section-wrap" id="gallery"><div className="gallery-heading"><div><p className="eyebrow"><span/> A VISUAL STUDY</p><h2>Our aesthetic <em>world.</em></h2></div><p className="muted">An editorial collection of mood, texture and light.<br/>All images are illustrative, not patient results.</p></div><div className="gallery-grid">{gallery.map((item,i)=><figure className={i===1?"gallery-item gallery-tall":"gallery-item"} key={item.label}><img loading="lazy" src={item.src} alt={item.alt}/><figcaption><span>0{i+1}</span>{item.label}<ArrowUpRightIcon/></figcaption></figure>)}</div><p className="gallery-disclaimer">DEMONSTRATION GALLERY · IMAGES DO NOT REPRESENT PATIENTS OR CLINICAL RESULTS</p></section>
+    <section className="testimonial-section"><div className="quote-mark">“</div><p className="eyebrow">SAMPLE TESTIMONIALS</p><h2>A feeling of <em>possibility.</em></h2><div className="quote-grid">{[{q:"A beautiful example of how thoughtful design can make a digital experience feel calm and personal.",n:"Amelia Hart"},{q:"Every detail feels considered. The visual world is warm, modern and wonderfully understated.",n:"Sophia Bennett"},{q:"A lovely concept that puts individuality and a welcoming atmosphere at the centre.",n:"Olivia Morgan"}].map(q=><blockquote key={q.n}><div className="stars">✳ ✳ ✳</div><p>“{q.q}”</p><cite>{q.n}</cite></blockquote>)}</div><p className="fictional-note">These are fictional testimonials created for demonstration purposes only. They are not real reviews.</p></section>
+    <section className="contact-cta" id="contact"><div className="cta-orb"><Sparkles/></div><p className="eyebrow">A DIGITAL EXPERIENCE, REIMAGINED</p><h2>Your journey<br/><em>starts here.</em></h2><p>Explore this fictional clinic concept and discover a refined approach to digital aesthetic experiences.</p><button className="button-primary" onClick={()=>setShowDemo(!showDemo)}>{showDemo?"Close demo panel":"Explore the demo"} <ArrowRight size={16}/></button>{showDemo&&<div className="demo-panel"><strong>Demonstration interaction</strong><p>This is a fictional website preview. No medical appointment can be booked and no personal information is collected.</p><button className="text-link" onClick={()=>setShowDemo(false)}>Understood <X size={14}/></button></div>}</section>
+    <footer className="footer"><div className="footer-main"><div className="footer-brand"><a href="#home" className="brand"><span>PROGENY</span><small>A E S T H E T I C</small></a><p>Beauty, balance and confidence.<br/>A fictional brand concept for digital design.</p></div><div className="footer-col"><h4>EXPLORE</h4><a href="#about">About the concept</a><a href="#services">Services overview</a><a href="#gallery">Visual gallery</a><a href="#journal">Our philosophy</a></div><div className="footer-col"><h4>DEMO CONTACT</h4><span>Demo address — not a real location.</span><span>demo@example.com</span><span>+00 000 000 0000</span></div><div className="footer-col"><h4>FOLLOW THE CONCEPT</h4><a href="#gallery">Instagram — demo</a><a href="#gallery">Facebook — demo</a><a href="#contact">Privacy notice — demo</a></div></div><div className="footer-bottom"><span>© 2026 PROGENY AESTHETIC · FICTIONAL DEMONSTRATION</span><span>All details, services, names and testimonials are illustrative.</span><a href="#home">Back to top ↑</a></div></footer>
+  </main>;
 }
+function ArrowUpRightIcon(){return <MoveUpRight size={15} strokeWidth={1.5}/>;}
