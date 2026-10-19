@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowDownRight, ArrowRight, Menu, X, Sparkles, Flower2, Heart, ScanFace, CircleUserRound, MoveUpRight, Instagram, Facebook, Play } from "lucide-react";
+import { ArrowDownRight, ArrowRight, Menu, X, Sparkles, Flower2, Heart, ScanFace, CircleUserRound, MoveUpRight, Instagram, Facebook } from "lucide-react";
 
 export const Route = createFileRoute("/")({ component: Index });
 
