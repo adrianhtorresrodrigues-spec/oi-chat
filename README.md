@@ -1,24 +1,26 @@
-# Oi Chat
+# Progeny Aesthetic — demonstração fictícia
 
-Oi
+Landing page editorial premium para uma marca fictícia de estética. Todo o conteúdo clínico, institucional, serviços, nomes e depoimentos são ilustrativos; não existe agendamento real.
 
-This project was built with [Lovable](https://lovable.dev).
+## Stack
+- React + TypeScript
+- TanStack Start/Router e Vite
+- CSS responsivo
+- lucide-react
 
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/40880fc1-bce9-4077-b33c-5e30908eb4e4).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
+## Executar localmente
+```bash
+npm install
 npm run dev
 ```
+
+## Personalização
+- Conteúdo e seções: `src/routes/index.tsx`
+- Identidade visual, responsividade e animações: `src/styles.css`
+- Nome da marca: componente `brand` em `src/routes/index.tsx`
+- Imagens: URLs na constante `gallery` e atributos `src` do hero e seção institucional.
+
+## Recursos demonstrativos
+Navegação por âncoras, menu móvel, botões de exploração, galeria responsiva e painel explicativo de demonstração. Não há backend, coleta de dados nem marcação de consultas. As imagens são ilustrativas e carregadas de URLs externas.
+
+**Aviso:** Progeny Aesthetic é uma marca fictícia de demonstração. Endereço, contato, serviços, nomes e depoimentos são ilustrativos.
